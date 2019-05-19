@@ -23,9 +23,13 @@ class Trader:
         - data_path(str) : the directory path to the OHLCV data used to extract state representations \
                       and train/test the agent
         - Q_Net(Q_Network object) : the prediction network used to approximate Q_values for every action in any state
-        - Target_Net(Target_Network object) : the target network used to approximate target Q_values every action \
+        - TNet(Target_Network object) : the target network used to approximate target Q_values every action \
                                               in any state
-                                              
+        - batch_size(int, default=10) : the training batch size
+        - discount(float, default=0.9) : the discount factor for the agent
+        - epsilon(float, default=0.5) : the parameter for the epsilon-greedy action choice
+        - decay(float, default=1e-7) : the decay factor for epsilon
+
         RETURNS
         -------
         - None
@@ -65,7 +69,7 @@ class Trader:
         
         # Algorithm specific parameters
         self.epsilon = self.epsilon_start = epsilon
-        self.eps_decay = 1e-3
+        self.eps_decay = decay
         
     def compute_MA(self, series, long_term=True):
         """
@@ -176,7 +180,8 @@ class Trader:
         ----------
         - data_idx : the data index of the instance for which the state representation needs to be extracted
         - action : the action used to encode a one-hot-vector into the state representation
-        
+        - is_training(bool, default=True) : if True, training mode
+
         RETURNS
         -------
         - the state representation ; a list.
@@ -267,6 +272,7 @@ class Trader:
         ----------
         - v_new(float) : the portfolio value after the agent's transition to the new state
         - v_previous(float) : the portfolio value before the agent's transition to the new state
+        - action(int) : the action taken by the agent in the state (-1, 0 or -1)
             
         RETURNS
         -------

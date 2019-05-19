@@ -33,7 +33,7 @@ class Prediction_Network(tf.keras.models.Model):
         self.a = tf.placeholder(shape=[None, 1], dtype=tf.int32)
         self.r = tf.placeholder(shape=[None, 1], dtype=tf.float32)
         self.Q_t = tf.placeholder(shape=[None, 1], dtype=tf.float32)
-        # model architecture : states --> fc(180) ---> fc(90) ---> fc(30) --> lstm(256) ---> lstm(128) --> fc(3)/Q-values
+        # model architecture : states --> fc(180) ---> fc(90) ---> fc(30) --> fc(3)/Q-values
         self.fc1 = tf.keras.layers.Dense(units=180, kernel_initializer=tf.initializers.identity(), activation=tf.nn.relu)
         self.fc2 = tf.keras.layers.Dense(units=90, kernel_initializer=tf.initializers.identity(), activation=tf.nn.relu)
         self.fc3 = tf.keras.layers.Dense(units=30, kernel_initializer=tf.initializers.identity(), activation=tf.nn.relu)
