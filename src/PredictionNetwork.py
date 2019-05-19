@@ -10,7 +10,7 @@ import tensorflow as tf
 
 class Prediction_Network(tf.keras.models.Model):
     
-    """ Deep Recurrent Q-Network that uses 1-dimensional Convolution (temporal) and FC layers """
+    """ Deep Q-Network. """
     
     def __init__(self, learning_rate, discount_rate):
         """
