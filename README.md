@@ -7,5 +7,4 @@ The agent uses a simple feed-forward, fully-connected neural network to choose a
 Python Dependencies:
 -------------------
 - tensorflow
-- 
-
+- pandas
